@@ -1,0 +1,20 @@
+version: 1.2.2
+name: UtilityPlugin
+commands:
+  sleepers:
+    usage: /sleepers [toggle|reset]
+    description: Show the list of players currently sleeping
+    permission: utility.sleepers
+    permission-message: You do not have permission to use this command
+  nick:
+    usage: /nick <load|save|set|get|clear|toggle>
+    description: Shows/edits the nickname of a player
+    permission: utility.nick
+    permission-message: You do not have permission to use this command
+  whereis:
+    usage: /whereis <player>
+    description: Returns the location of a player
+    permission: utility.whereis
+    permission-message: You do not have permission to use this command
+main: com.gmail.leeyi45.utilityPlugin.UtilityPlugin
+api-version: 1.13
