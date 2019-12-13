@@ -89,7 +89,7 @@ public class SleepProcessor
                     try { Thread.sleep(200); }
                     catch(InterruptedException ignore) { }
                     timeSetting = false;
-                }).run();
+                }).start();
 
                 sleepingPlayers.forEach(p -> p.setStatistic(Statistic.TIME_SINCE_REST, 0));
                 sleepingPlayers.clear();
