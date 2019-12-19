@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class NickCommand implements CommandExecutor
@@ -19,7 +20,7 @@ public class NickCommand implements CommandExecutor
     {
         if(args.length >= 1)
         {
-            var players = UtilityPlugin.playersByName();
+            HashMap<String, Player> players = UtilityPlugin.playersByName();
 
             switch(args[0].toLowerCase())
             {
@@ -134,7 +135,7 @@ public class NickCommand implements CommandExecutor
 
                         HashMap<UUID, String> nicknames = NicknameProcessor.getNicknames();
 
-                        for(var entry : nicknames.entrySet())
+                        for(Map.Entry<UUID, String> entry : nicknames.entrySet())
                         {
                             if(entry.getValue().equalsIgnoreCase(nickStr))
                             {

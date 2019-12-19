@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+
 public class WhereIsCommand implements CommandExecutor
 {
     @Override
@@ -15,7 +17,7 @@ public class WhereIsCommand implements CommandExecutor
         if(args.length != 1) return false;
         else
         {
-            var players = UtilityPlugin.playersByName();
+            HashMap<String, Player> players = UtilityPlugin.playersByName();
 
             if(players.containsKey(args[0]))
             {

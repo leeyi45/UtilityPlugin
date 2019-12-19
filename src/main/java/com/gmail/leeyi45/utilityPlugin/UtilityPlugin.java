@@ -8,6 +8,7 @@ import com.gmail.leeyi45.utilityPlugin.listeners.ChatEventListener;
 import com.gmail.leeyi45.utilityPlugin.listeners.InteractListener;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class UtilityPlugin extends JavaPlugin
 
     public static HashMap<String, Player> playersByName()
     {
-        var output = new HashMap<String, Player>();
+        HashMap<String, Player> output = new HashMap<>();
 
         for(Player p : instance.getServer().getOnlinePlayers())
         {
@@ -40,7 +41,7 @@ public class UtilityPlugin extends JavaPlugin
 
         config = getConfig();
 
-        var manager = getServer().getPluginManager();
+        PluginManager manager = getServer().getPluginManager();
         manager.registerEvents(new BedEventListener(), this);
         manager.registerEvents(new ChatEventListener(), this);
         manager.registerEvents(new InteractListener(), this);

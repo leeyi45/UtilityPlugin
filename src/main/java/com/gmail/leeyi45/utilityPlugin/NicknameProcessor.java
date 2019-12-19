@@ -4,6 +4,7 @@ import org.bukkit.command.CommandSender;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 public class NicknameProcessor
@@ -22,7 +23,7 @@ public class NicknameProcessor
     {
         if(nicknames.containsValue(name))
         {
-            for(var thing : nicknames.entrySet())
+            for(Map.Entry<UUID, String> thing : nicknames.entrySet())
             {
                 if(thing.getValue().equalsIgnoreCase(name)) return thing.getKey();
             }
@@ -52,7 +53,7 @@ public class NicknameProcessor
         try
         {
             PrintWriter writer = new PrintWriter(new FileWriter("nicknames.txt"));
-            for (var entry : nicknames.entrySet())
+            for (Map.Entry<UUID, String> entry : nicknames.entrySet())
             {
                 writer.println(entry.getKey().toString() + "," + entry.getValue());
             }
@@ -69,7 +70,7 @@ public class NicknameProcessor
 
     public static void loadNicknames(CommandSender sender)
     {
-        var temp = new HashMap<UUID, String>();
+        HashMap<UUID, String> temp = new HashMap<>();
         try
         {
             BufferedReader reader = new BufferedReader(new FileReader("nicknames.txt"));

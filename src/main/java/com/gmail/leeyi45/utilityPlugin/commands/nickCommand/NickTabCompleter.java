@@ -24,7 +24,7 @@ public class NickTabCompleter implements TabCompleter
                     case "set":
                     case "clear":
                     {
-                        var list = new ArrayList<String>();
+                        ArrayList<String> list = new ArrayList<>();
 
                         list.add("@s");
                         list.add("@a");

@@ -1,4 +1,4 @@
-version: 1.2.2
+version: 1.3
 name: UtilityPlugin
 commands:
   sleepers:
@@ -17,4 +17,3 @@ commands:
     permission: utility.whereis
     permission-message: You do not have permission to use this command
 main: com.gmail.leeyi45.utilityPlugin.UtilityPlugin
-api-version: 1.13

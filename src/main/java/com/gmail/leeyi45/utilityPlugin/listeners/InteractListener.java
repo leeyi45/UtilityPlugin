@@ -1,7 +1,9 @@
 package com.gmail.leeyi45.utilityPlugin.listeners;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -24,7 +26,7 @@ public class InteractListener implements Listener
         {
             if(e.getPlayer().isSneaking()) return;
 
-            var clickedBlock = e.getClickedBlock();
+            Block clickedBlock = e.getClickedBlock();
 
             ItemStack willDrop, mayDrop;
 
@@ -93,7 +95,7 @@ public class InteractListener implements Listener
 
             e.setCancelled(true);
 
-            var location = clickedBlock.getLocation();
+            Location location = clickedBlock.getLocation();
             clickedBlock.getWorld().dropItemNaturally(location, willDrop);
             if(mayDrop != null) clickedBlock.getWorld().dropItemNaturally(location, mayDrop);
         }

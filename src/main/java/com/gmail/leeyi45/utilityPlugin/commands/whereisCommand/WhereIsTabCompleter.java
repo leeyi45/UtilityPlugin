@@ -6,18 +6,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WhereIsTabCompleter implements TabCompleter
 {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings)
     {
-        var players = UtilityPlugin.playersByName();
-        var output = new ArrayList<String>();
+        HashMap<String, Player> players = UtilityPlugin.playersByName();
+        ArrayList<String> output = new ArrayList<>();
 
         for(Map.Entry<String, Player> p : players.entrySet()) output.add(p.getKey());
 

@@ -1,13 +1,9 @@
 package com.gmail.leeyi45.utilityPlugin;
 
-import net.md_5.bungee.api.ChatColor;
-import net.minecraft.server.v1_14_R1.ChatComponentText;
-import net.minecraft.server.v1_14_R1.ChatMessageType;
-import net.minecraft.server.v1_14_R1.PacketPlayOutChat;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Statistic;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_14_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
@@ -94,15 +90,6 @@ public class SleepProcessor
                 sleepingPlayers.forEach(p -> p.setStatistic(Statistic.TIME_SINCE_REST, 0));
                 sleepingPlayers.clear();
             }
-        }
-        else if(result == PlayerBedEnterEvent.BedEnterResult.NOT_POSSIBLE_NOW)
-        {
-            player.setBedSpawnLocation(event.getBed().getLocation());
-
-            PacketPlayOutChat packet = new PacketPlayOutChat(new ChatComponentText("Spawnpoint has been set"), ChatMessageType.GAME_INFO);
-
-            ((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
-            event.setCancelled(true);
         }
     }
 }

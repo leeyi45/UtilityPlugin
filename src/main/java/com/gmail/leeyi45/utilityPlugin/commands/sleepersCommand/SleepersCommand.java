@@ -4,6 +4,9 @@ import com.gmail.leeyi45.utilityPlugin.SleepProcessor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
 
 public class SleepersCommand implements CommandExecutor
 {
@@ -14,11 +17,11 @@ public class SleepersCommand implements CommandExecutor
         {
             if(SleepProcessor.getEnabled())
             {
-                var players = SleepProcessor.getSleepingPlayers();
+                ArrayList<Player> players = SleepProcessor.getSleepingPlayers();
 
                 if (players.size() > 0)
                 {
-                    var str = new StringBuilder("Players who are currently sleeping\n\n");
+                    StringBuilder str = new StringBuilder("Players who are currently sleeping\n\n");
 
                     for (int i = 0; i < players.size(); i++)
                     {
