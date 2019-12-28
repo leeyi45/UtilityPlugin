@@ -18,26 +18,35 @@ public class NickTabCompleter implements TabCompleter
             case 1: return Arrays.asList("get", "set", "clear", "toggle", "load", "save", "check");
             case 2:
             {
+                ArrayList<String> list = new ArrayList<>();
                 switch(args[1].toLowerCase())
                 {
-                    case "get":
                     case "set":
                     case "clear":
                     {
-                        ArrayList<String> list = new ArrayList<>();
-
                         list.add("@s");
                         list.add("@a");
-
+                    }
+                    case "get":
+                    {
+                        for(Player player : UtilityPlugin.getInstance().getServer().getOnlinePlayers())
+                        {
+                            list.add(player.getName());
+                        }
+                        return list;
+                    }
+                    case "check":
+                    {
                         for(Player player : UtilityPlugin.getInstance().getServer().getOnlinePlayers())
                         {
                             list.add(player.getDisplayName());
                         }
                         return list;
                     }
+                    default: return null;
                 }
             }
+            default: return null;
         }
-        return null;
     }
 }
