@@ -17,3 +17,4 @@ commands:
     permission: utility.whereis
     permission-message: You do not have permission to use this command
 main: com.gmail.leeyi45.utilityPlugin.UtilityPlugin
+api-version: 1.13
