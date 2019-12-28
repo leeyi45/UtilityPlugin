@@ -69,6 +69,17 @@ public class NickCommand implements CommandExecutor
                             String str = ChatColor.translateAlternateColorCodes( '&',
                                             String.join(" ", Arrays.copyOfRange(args, 2, args.length)));
 
+                            for(Map.Entry<UUID, String> each : NicknameProcessor.getNicknames().entrySet())
+                            {
+                                if(each.getValue().equalsIgnoreCase(str))
+                                {
+                                    Player existing = UtilityPlugin.getInstance().getServer().getPlayer(each.getKey());
+                                    sender.sendMessage(String.format("Another player %s already has the nickname '%s§f'!",
+                                            existing.getName(), str));
+                                    return true;
+                                }
+                            }
+
                             NicknameProcessor.setNickname(player.getUniqueId(), str);
                             sender.sendMessage("Nickname for " + args[1] + " set to " + str);
                         }
@@ -137,7 +148,7 @@ public class NickCommand implements CommandExecutor
 
                         for(Map.Entry<UUID, String> entry : nicknames.entrySet())
                         {
-                            if(entry.getValue().equalsIgnoreCase(nickStr))
+                            if(ChatColor.stripColor(entry.getValue()).equalsIgnoreCase(nickStr))
                             {
                                 Player p = UtilityPlugin.getInstance().getServer().getPlayer(entry.getKey());
 
