@@ -2,6 +2,7 @@ package com.gmail.leeyi45.utilityPlugin.listeners;
 
 import com.gmail.leeyi45.utilityPlugin.NicknameProcessor;
 import com.gmail.leeyi45.utilityPlugin.SleepProcessor;
+import com.gmail.leeyi45.utilityPlugin.UtilityPlugin;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,10 +29,11 @@ public class ChatEventListener implements Listener
         if(NicknameProcessor.getEnabled())
         {
             String nick = NicknameProcessor.getNickname(e.getPlayer().getUniqueId());
-
             if (nick != null)
             {
-                e.setJoinMessage(nick + " joined the game");
+                if(nick.contains("§")) e.setJoinMessage(nick + " §ejoined the game");
+                else e.setJoinMessage("§e" + nick + " joined the game");
+
                 e.getPlayer().setDisplayName(nick);
             }
         }
