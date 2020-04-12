@@ -31,6 +31,28 @@ public class SleepProcessor
     public static void setEnabled(boolean value) { enabled = value; }
     public static boolean getEnabled() { return enabled; }
 
+    public static void playerChanged(int percent, World w)
+    {
+        if(percent >= threshold)
+        { //Skip time
+            timeSetting = true;
+            w.setTime(0);
+            w.setStorm(false);
+            w.setThundering(false);
+            Bukkit.broadcastMessage(prefix + " Skipping time to day...");
+
+            new Thread(() ->
+            {
+                try { Thread.sleep(200); }
+                catch(InterruptedException ignore) { }
+                timeSetting = false;
+            }).start();
+
+            sleepingPlayers.forEach(p -> p.setStatistic(Statistic.TIME_SINCE_REST, 0));
+            sleepingPlayers.clear();
+        }
+    }
+
     public static void leaveBed(Player player)
     {
         if(timeSetting || !enabled) return;
@@ -59,37 +81,20 @@ public class SleepProcessor
             if(!enabled) return;
 
             sleepingPlayers.add(player);
+
             int totalPlayers = UtilityPlugin.getInstance().getServer().getOnlinePlayers().size();
 
             int sleepCount = sleepingPlayers.size();
             int percent = (int)Math.round((double)sleepCount/totalPlayers*100);
 
             Bukkit.broadcastMessage(String.format("%s %s entered a bed, %d out of %d player%s %s (%d%%) now sleeping",
-                prefix,
-                player.getDisplayName(),
-                sleepCount, totalPlayers,
-                totalPlayers == 1 ? "" : "s",
-                sleepCount == 1 ? "is" : "are", percent));
+                    prefix,
+                    player.getDisplayName(),
+                    sleepCount, totalPlayers,
+                    totalPlayers == 1 ? "" : "s",
+                    sleepCount == 1 ? "is" : "are", percent));
 
-            if(percent >= threshold)
-            { //Skip time
-                timeSetting = true;
-                World w = event.getBed().getWorld();
-                w.setTime(0);
-                w.setStorm(false);
-                w.setThundering(false);
-                Bukkit.broadcastMessage(prefix + " Skipping time to day...");
-
-                new Thread(() ->
-                {
-                    try { Thread.sleep(200); }
-                    catch(InterruptedException ignore) { }
-                    timeSetting = false;
-                }).start();
-
-                sleepingPlayers.forEach(p -> p.setStatistic(Statistic.TIME_SINCE_REST, 0));
-                sleepingPlayers.clear();
-            }
+            playerChanged(percent, event.getBed().getWorld());
         }
     }
 }

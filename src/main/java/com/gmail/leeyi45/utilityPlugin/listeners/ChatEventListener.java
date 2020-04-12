@@ -44,7 +44,7 @@ public class ChatEventListener implements Listener
     {
         Player p = e.getPlayer();
 
-        if(SleepProcessor.getSleepingPlayers().contains(p.getDisplayName()))
+        if(SleepProcessor.getSleepingPlayers().contains(p))
             SleepProcessor.leaveBed(p);
     }
 }
